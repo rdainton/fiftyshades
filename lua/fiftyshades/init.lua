@@ -1,137 +1,166 @@
 local M = {}
 
-local none = { gui = "NONE", cterm = "NONE" }
-local colors = require("fiftyshades.palette")
-local BG = colors.grey50
+local palette = require("fiftyshades.palette")
 
-local none_class = "FiftyShadesNone"
+--- @class Highlight
+--- @field fg Color Foreground color
+--- @field bg Color Background color
 
-local hi = function(group, colors)
+--- @alias TextDecoration
+--- | "bold"
+--- | "italic"
+--- | "underline"
+--- | "strikethrough"
+--- | "reverse"
+--- | "nocombine"
+
+local background = palette.grey900
+
+local class_none = "FiftyShadesNone"
+local class_debug = "FiftyShadesDebug"
+
+--- Sets highlight group with foreground and background colors
+--- @param group string
+--- @param highlight Highlight
+local hi = function(group, highlight)
 	vim.api.nvim_set_hl(0, group, {
-		fg = colors.fg.gui,
-		bg = colors.bg.gui,
-		ctermfg = colors.fg.cterm,
-		ctermbg = colors.bg.cterm,
+		fg = highlight.fg.gui,
+		bg = highlight.bg.gui,
+		ctermfg = highlight.fg.cterm,
+		ctermbg = highlight.bg.cterm,
 	})
 end
 
-local hs = function(group, colors, style)
-	local opts = {
-		fg = colors.fg.gui,
-		bg = colors.bg.gui,
-		ctermfg = colors.fg.cterm,
-		ctermbg = colors.bg.cterm,
+--- Sets highlight group with colors and additional styling (bold, italic, underline, etc.)
+--- @param group string
+--- @param highlight Highlight
+--- @param decorations TextDecoration[]
+local hs = function(group, highlight, decorations)
+	--- @type table<string, any>
+	local highlight_opts = {
+		fg = highlight.fg.gui,
+		bg = highlight.bg.gui,
+		ctermfg = highlight.fg.cterm,
+		ctermbg = highlight.bg.cterm,
 	}
 
-	for _, item in ipairs(style) do
-		opts[item] = true
+	for _, item in ipairs(decorations) do
+		highlight_opts[item] = true
 	end
 
-	vim.api.nvim_set_hl(0, group, opts)
+	vim.api.nvim_set_hl(0, group, highlight_opts)
 end
 
+--- Links one highlight group to another
+--- @param group string The highlight group to create
+--- @param link string The existing highlight group to link to
 local link = function(group, link)
 	vim.api.nvim_set_hl(0, group, { link = link })
 end
 
+--- Sets up basic syntax highlighting for code elements
 M.base_syntax = function()
-	hi(none_class, { fg = none, bg = none })
-	hi("Normal", { fg = colors.grey950, bg = BG })
-	hi("Comment", { fg = colors.grey600, bg = none })
-	hi("String", { fg = colors.grey800, bg = none })
-	hi("Character", { fg = colors.grey800, bg = none })
-	hi("Number", { fg = colors.grey700, bg = none })
-	hi("Boolean", { fg = colors.grey700, bg = none })
-	hi("Float", { fg = colors.grey700, bg = none })
-	hi("Function", { fg = colors.grey950, bg = none })
-	hi("Special", { fg = colors.grey950, bg = none })
-	hi("SpecialChar", { fg = colors.grey950, bg = none })
-	hi("SpecialKey", { fg = colors.grey600, bg = none })
-	hi("Error", { fg = colors.grey950, bg = none })
+	hi(class_none, { fg = palette.none, bg = palette.none })
+	hi(class_debug, { fg = palette.grey950, bg = palette.red500 })
 
-	hi("Constant", { fg = colors.grey700, bg = none })
-	hi("Statement", { fg = colors.grey900, bg = none })
-	hi("Conditional", { fg = colors.grey900, bg = none })
-	hi("Exception", { fg = colors.grey900, bg = none })
-	hi("Identifier", { fg = colors.grey950, bg = none })
-	hi("Type", { fg = colors.grey900, bg = none })
-	hi("Repeat", { fg = colors.grey900, bg = none })
-	hi("Label", { fg = colors.grey900, bg = none })
-	hi("Operator", { fg = colors.grey950, bg = none })
-	hi("Keyword", { fg = colors.grey900, bg = none })
-	hi("Delimiter", { fg = colors.grey950, bg = none })
-	hi("Tag", { fg = colors.grey900, bg = none })
-	hi("SpecialComment", { fg = colors.grey600, bg = none })
-	hi("Debug", { fg = colors.grey950, bg = none })
-	hi("PreProc", { fg = colors.grey900, bg = none })
-	hi("Include", { fg = colors.grey900, bg = none })
-	hi("Define", { fg = colors.grey900, bg = none })
-	hi("Macro", { fg = colors.grey900, bg = none })
-	hi("PreCondit", { fg = colors.grey900, bg = none })
-	hi("StorageClass", { fg = colors.grey900, bg = none })
-	hi("Structure", { fg = colors.grey900, bg = none })
-	hi("Typedef", { fg = colors.grey900, bg = none })
-	hi("Title", { fg = colors.grey950, bg = none })
-	hi("Todo", { fg = BG, bg = colors.grey950 })
-	hi("Underlined", { fg = colors.grey950, bg = none })
-	hi("Ignore", { fg = colors.grey600, bg = none })
+	hi("Normal", { fg = palette.grey50, bg = background })
+	hi("Comment", { fg = palette.grey50, bg = palette.none })
+	hi("String", { fg = palette.grey200, bg = palette.none })
+	hi("Character", { fg = palette.grey200, bg = palette.none })
+	hi("Number", { fg = palette.grey200, bg = palette.none })
+	hi("Boolean", { fg = palette.grey200, bg = palette.none })
+	hi("Float", { fg = palette.grey200, bg = palette.none })
+	hi("Function", { fg = palette.grey400, bg = palette.none })
+	hi("Special", { fg = palette.grey50, bg = palette.none })
+	hi("SpecialChar", { fg = palette.grey50, bg = palette.none })
+	hi("SpecialKey", { fg = palette.grey400, bg = palette.none })
+	hi("Error", { fg = palette.grey50, bg = palette.none })
+
+	hi("Constant", { fg = palette.grey400, bg = palette.none })
+	hi("Statement", { fg = palette.grey400, bg = palette.none })
+	hi("Conditional", { fg = palette.grey400, bg = palette.none })
+	hi("Exception", { fg = palette.grey400, bg = palette.none })
+	hi("Identifier", { fg = palette.grey300, bg = palette.none })
+	hi("Type", { fg = palette.grey400, bg = palette.none })
+	hi("Repeat", { fg = palette.grey400, bg = palette.none })
+	hi("Label", { fg = palette.grey400, bg = palette.none })
+	hi("Operator", { fg = palette.grey400, bg = palette.none })
+	hi("Keyword", { fg = palette.grey400, bg = palette.none })
+	hi("Delimiter", { fg = palette.grey400, bg = palette.none })
+	hi("Tag", { fg = palette.grey100, bg = palette.none })
+	hi("SpecialComment", { fg = palette.grey400, bg = palette.none })
+	hi("Debug", { fg = palette.grey50, bg = palette.none })
+	hi("PreProc", { fg = palette.grey100, bg = palette.none })
+	hi("Include", { fg = palette.grey100, bg = palette.none })
+	hi("Define", { fg = palette.grey100, bg = palette.none })
+	hi("Macro", { fg = palette.grey100, bg = palette.none })
+	hi("PreCondit", { fg = palette.grey100, bg = palette.none })
+	hi("StorageClass", { fg = palette.grey100, bg = palette.none })
+	hi("Structure", { fg = palette.grey100, bg = palette.none })
+	hi("Typedef", { fg = palette.grey100, bg = palette.none })
+	hi("Title", { fg = palette.grey50, bg = palette.none })
+	hi("Todo", { fg = background, bg = palette.grey50 })
+	hi("Underlined", { fg = palette.grey50, bg = palette.none })
+	hi("Ignore", { fg = palette.grey400, bg = palette.none })
 end
 
+--- Sets up UI element highlighting (cursor, search, menus, etc.)
 M.ui = function()
 	local underline = { "underline" }
 
-	hi("Cursor", { fg = BG, bg = colors.grey950 })
-	hi("CursorLine", { fg = none, bg = colors.grey100 })
-	hi("CursorLineNr", { fg = colors.grey950, bg = colors.grey100 })
-	hi("ColorColumn", { fg = none, bg = colors.grey200 })
-	hi("LineNr", { fg = colors.grey500, bg = none })
-	hi("NonText", { fg = colors.grey400, bg = none })
-	hi("EndOfBuffer", { fg = colors.grey300, bg = none })
-	hi("VertSplit", { fg = colors.grey300, bg = none })
-	hi("WinSeparator", { fg = colors.grey300, bg = none })
-	hi("Folded", { fg = colors.grey700, bg = colors.grey200 })
-	hi("FoldColumn", { fg = colors.grey600, bg = none })
-	hi("SignColumn", { fg = none, bg = none })
-	hi("Pmenu", { fg = colors.grey950, bg = colors.grey200 })
-	hi("PmenuSel", { fg = BG, bg = colors.grey800 })
-	hi("PmenuSbar", { fg = none, bg = colors.grey300 })
-	hi("PmenuThumb", { fg = none, bg = colors.grey600 })
-	hi("TabLine", { fg = colors.grey700, bg = colors.grey200 })
-	hi("TabLineFill", { fg = colors.grey700, bg = colors.grey200 })
-	hi("TabLineSel", { fg = colors.grey950, bg = BG })
-	hi("StatusLine", { fg = colors.grey950, bg = colors.grey200 })
-	hi("StatusLineNC", { fg = colors.grey600, bg = colors.grey200 })
-	hi("WildMenu", { fg = BG, bg = colors.grey800 })
-	hi("Visual", { fg = BG, bg = colors.grey700 })
-	hi("Search", { fg = BG, bg = colors.grey600 })
-	hi("IncSearch", { fg = BG, bg = colors.grey800 })
-	hi("CurSearch", { fg = BG, bg = colors.grey800 })
-	hi("Directory", { fg = colors.grey800, bg = none })
+	hi("Cursor", { fg = palette.grey900, bg = palette.grey50 })
+	hi("CursorLine", { fg = palette.grey50, bg = palette.grey800 })
+	hi("CursorLineNr", { fg = palette.grey50, bg = palette.grey800 })
+	hi("ColorColumn", { fg = palette.none, bg = palette.grey800 })
+	hi("LineNr", { fg = palette.grey400, bg = palette.none })
+	hi("NonText", { fg = palette.grey600, bg = palette.none })
+	hi("EndOfBuffer", { fg = palette.grey700, bg = palette.none })
+	hi("VertSplit", { fg = palette.grey700, bg = palette.none })
+	hi("WinSeparator", { fg = palette.grey700, bg = palette.none })
+	hi("Folded", { fg = palette.grey300, bg = palette.grey800 })
+	hi("FoldColumn", { fg = palette.grey400, bg = palette.none })
+	hi("SignColumn", { fg = palette.none, bg = palette.none })
+	hi("Pmenu", { fg = palette.grey50, bg = palette.grey800 })
+	hi("PmenuSel", { fg = background, bg = palette.grey200 })
+	hi("PmenuSbar", { fg = palette.none, bg = palette.grey700 })
+	hi("PmenuThumb", { fg = palette.none, bg = palette.grey400 })
+	hi("TabLine", { fg = palette.grey300, bg = palette.grey800 })
+	hi("TabLineFill", { fg = palette.grey300, bg = palette.grey800 })
+	hi("TabLineSel", { fg = palette.grey50, bg = background })
+	hi("StatusLine", { fg = palette.grey50, bg = palette.grey800 })
+	hi("StatusLineNC", { fg = palette.grey400, bg = palette.grey800 })
+	hi("WildMenu", { fg = background, bg = palette.grey200 })
+	hi("Visual", { fg = palette.grey50, bg = palette.grey700 })
+	hi("Search", { fg = palette.grey50, bg = palette.grey600 })
+	hi("IncSearch", { fg = palette.grey50, bg = palette.grey800 })
+	hi("CurSearch", { fg = palette.grey50, bg = palette.grey800 })
+	hi("Directory", { fg = palette.grey200, bg = palette.none })
 
-	hs("MatchParen", { fg = colors.grey950, bg = colors.grey300 }, underline)
+	hs("MatchParen", { fg = palette.grey50, bg = palette.grey700 }, underline)
 
-	hi("ErrorMsg", { fg = colors.grey950, bg = none })
-	hi("WarningMsg", { fg = colors.grey800, bg = none })
-	hi("ModeMsg", { fg = colors.grey700, bg = none })
-	hi("MoreMsg", { fg = colors.grey700, bg = none })
-	hi("Question", { fg = colors.grey800, bg = none })
-	hi("MsgArea", { fg = colors.grey950, bg = none })
+	hi("ErrorMsg", { fg = palette.grey50, bg = palette.none })
+	hi("WarningMsg", { fg = palette.grey200, bg = palette.none })
+	hi("ModeMsg", { fg = palette.grey300, bg = palette.none })
+	hi("MoreMsg", { fg = palette.grey300, bg = palette.none })
+	hi("Question", { fg = palette.grey200, bg = palette.none })
+	hi("MsgArea", { fg = palette.grey50, bg = palette.none })
 
-	hi("DiagnosticError", { fg = colors.grey900, bg = none })
-	hi("DiagnosticWarn", { fg = colors.grey700, bg = none })
-	hi("DiagnosticInfo", { fg = colors.grey600, bg = none })
-	hi("DiagnosticHint", { fg = colors.grey500, bg = none })
+	hi("DiagnosticError", { fg = palette.grey100, bg = palette.none })
+	hi("DiagnosticWarn", { fg = palette.grey300, bg = palette.none })
+	hi("DiagnosticInfo", { fg = palette.grey400, bg = palette.none })
+	hi("DiagnosticHint", { fg = palette.grey400, bg = palette.none })
 
-	hs("DiagnosticUnderlineError", { fg = colors.grey900, bg = none }, underline)
-	hs("DiagnosticUnderlineWarn", { fg = colors.grey700, bg = none }, underline)
-	hs("DiagnosticUnderlineInfo", { fg = colors.grey600, bg = none }, underline)
-	hs("DiagnosticUnderlineHint", { fg = colors.grey500, bg = none }, underline)
+	hs("DiagnosticUnderlineError", { fg = palette.grey100, bg = palette.none }, underline)
+	hs("DiagnosticUnderlineWarn", { fg = palette.grey300, bg = palette.none }, underline)
+	hs("DiagnosticUnderlineInfo", { fg = palette.grey400, bg = palette.none }, underline)
+	hs("DiagnosticUnderlineHint", { fg = palette.grey400, bg = palette.none }, underline)
 
-	hi("NormalFloat", { fg = colors.grey950, bg = colors.grey100 })
-	hi("FloatBorder", { fg = colors.grey400, bg = colors.grey100 })
-	hi("Whitespace", { fg = colors.grey400, bg = none })
+	hi("NormalFloat", { fg = palette.grey50, bg = palette.grey800 })
+	hi("FloatBorder", { fg = palette.grey600, bg = palette.grey800 })
+	hi("Whitespace", { fg = palette.grey600, bg = palette.none })
 end
 
+--- Links various highlight groups to base groups for consistency
 M.apply_links = function()
 	-- UI: Diff
 	link("DiffAdd", "DiagnosticWarn")
@@ -164,7 +193,7 @@ M.apply_links = function()
 
 	-- Language: lua
 	-- Syntax: built-in
-	link("luaFunction", none_class)
+	link("luaFunction", class_none)
 
 	-- Language: HTML
 	-- Syntax: built-in
@@ -172,54 +201,54 @@ M.apply_links = function()
 	link("htmlEndTag", "Special")
 	link("htmlTagName", "Function")
 	link("htmlSpecialTagName", "Function")
-	link("htmlArg", none_class)
+	link("htmlArg", class_none)
 
 	-- Language: CSS
 	-- Syntax: built-in
 	link("cssTagName", "Function")
 	link("cssColor", "Number")
-	link("cssVendor", none_class)
-	link("cssBraces", none_class)
-	link("cssSelectorOp", none_class)
-	link("cssSelectorOp2", none_class)
-	link("cssIdentifier", none_class)
-	link("cssClassName", none_class)
-	link("cssClassNameDot", none_class)
-	link("cssVendor", none_class)
-	link("cssImportant", none_class)
-	link("cssAttributeSelector", none_class)
+	link("cssVendor", class_none)
+	link("cssBraces", class_none)
+	link("cssSelectorOp", class_none)
+	link("cssSelectorOp2", class_none)
+	link("cssIdentifier", class_none)
+	link("cssClassName", class_none)
+	link("cssClassNameDot", class_none)
+	link("cssVendor", class_none)
+	link("cssImportant", class_none)
+	link("cssAttributeSelector", class_none)
 
 	-- Language: PHP
 	-- Syntax: built-in
 	link("phpNullValue", "Boolean")
 	link("phpSpecialFunction", "Function")
-	link("phpParent", none_class)
-	link("phpClasses", none_class)
+	link("phpParent", class_none)
+	link("phpClasses", class_none)
 
 	-- Language: Javascript
 	-- Syntax: built-in
 	link("javaScriptNumber", "Number")
 	link("javaScriptNull", "Number")
-	link("javaScriptBraces", none_class)
-	link("javaScriptFunction", none_class)
+	link("javaScriptBraces", class_none)
+	link("javaScriptFunction", class_none)
 
 	-- Language: Javascript
 	-- Syntax: 'pangloss/vim-javascript'
 	link("jsFunctionKey", "Function")
 	link("jsUndefined", "Number")
 	link("jsNull", "Number")
-	link("jsSuper", none_class)
-	link("jsThis", none_class)
-	link("jsArguments", none_class)
+	link("jsSuper", class_none)
+	link("jsThis", class_none)
+	link("jsArguments", class_none)
 
 	-- Language: Typescript
 	-- Syntax: built-in
-	link("typescriptImport", none_class)
-	link("typescriptExport", none_class)
-	link("typescriptBraces", none_class)
-	link("typescriptDecorator", none_class)
-	link("typescriptParens", none_class)
-	link("typescriptCastKeyword", none_class)
+	link("typescriptImport", class_none)
+	link("typescriptExport", class_none)
+	link("typescriptBraces", class_none)
+	link("typescriptDecorator", class_none)
+	link("typescriptParens", class_none)
+	link("typescriptCastKeyword", class_none)
 
 	-- Language: JSX
 	-- Syntax: 'maxmellon/vim-jsx-pretty'
@@ -228,31 +257,33 @@ M.apply_links = function()
 	link("jsxPunct", "Special")
 	link("jsxCloseString", "Special")
 	link("jsxEqual", "Special")
-	link("jsxAttrib", none_class)
+	link("jsxAttrib", class_none)
 
 	-- Treesitter (old highlight groups)
-	link("TSConstructor", none_class)
-	link("TSVariableBuiltin", none_class)
+	link("TSConstructor", class_none)
+	link("TSVariableBuiltin", class_none)
 	link("TSConstBuiltin", "Number")
 	link("TSFuncBuiltin", "Function")
-	link("luaTSPunctBracket", none_class)
-	link("TSKeywordFunction", none_class)
+	link("luaTSPunctBracket", class_none)
+	link("TSKeywordFunction", class_none)
 
 	-- Treesitter
 	link("@function.call", "Function")
 	link("@function.builtin", "Function")
-	link("@punctuation.bracket", none_class)
+	link("@punctuation.bracket", class_none)
 	link("@constant.builtin", "Number")
-	link("@constructor", none_class)
+	link("@constructor", class_none)
 	link("@type.css", "Function")
 	link("@constructor.php", "Function")
-	link("@method.vue", none_class)
+	link("@method.vue", class_none)
 	link("@tag.delimiter", "Special")
-	link("@tag.attribute", none_class)
+	link("@tag.attribute", class_none)
 	link("@tag", "Function")
 	link("@text.uri.html", "String")
 end
 
+--- Initializes the colorscheme by clearing existing highlights and setting options
+--- @param name string The name of the colorscheme
 M.init = function(name)
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
@@ -263,6 +294,7 @@ M.init = function(name)
 	vim.g.colors_name = name
 end
 
+--- Main setup function that applies the complete colorscheme
 function M.setup()
 	M.init("fiftyshades")
 	M.base_syntax()
