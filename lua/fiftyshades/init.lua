@@ -109,7 +109,7 @@ M.ui = function()
 	local underline = { "underline" }
 
 	hi("Cursor", { fg = palette.bg, bg = palette.fg })
-	hi("CursorLine", { fg = palette.fg, bg = palette.grey_60 })
+	hi("CursorLine", { fg = palette.none, bg = palette.grey_60 })
 	hi("CursorLineNr", { fg = palette.fg, bg = palette.grey_60 })
 	hi("ColorColumn", { fg = palette.none, bg = palette.grey_60 })
 	hi("LineNr", { fg = palette.grey_30, bg = palette.none })
