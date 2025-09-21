@@ -16,13 +16,13 @@ local palette = {
 	fg = color("#CCCCCC", 252),
 
 	-- Grayscale spectrum
-	white = color("#fcfcfc", 255),
-	light_grey = color("#f7f7f7", 255),
-	grey = color("#a5a5a5", 248),
-	dark_grey = color("#5a5a5a", 240),
-	darker_grey = color("#303030", 236),
-	darkest_grey = color("#242424", 235),
-	black = color("#181818", 233),
+	gray_10 = color("#fcfcfc", 255),
+	grey_20 = color("#f7f7f7", 255),
+	grey_30 = color("#a5a5a5", 248),
+	grey_40 = color("#5a5a5a", 240),
+	grey_50 = color("#303030", 236),
+	grey_60 = color("#242424", 235),
+	grey_70 = color("#181818", 233),
 
 	-- Accent color
 	yellow = color("#dadd99", 186),
