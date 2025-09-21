@@ -24,8 +24,10 @@ local palette = {
 	grey_60 = color("#242424", 235),
 	grey_70 = color("#181818", 233),
 
-	-- Accent color
+	-- Accent colors
 	yellow = color("#dadd99", 186),
+	lime_green = color("#8fbc8f", 108),
+	matrix_green = color("#00ff41", 46),
 
 	none = { gui = "NONE", cterm = "NONE" },
 }
