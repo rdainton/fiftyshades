@@ -1,6 +1,6 @@
 # Fifty Shades
 
-A minimalist greyscale Neovim colorscheme with dark background.
+A minimalist Neovim colorscheme inspired by Alabaster for Sublime Text. Features subtle syntax highlighting with colors only for comments, strings, constants, and functions - everything else remains greyscale.
 
 ## Installation
 
@@ -8,17 +8,10 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "your-username/fiftyshades",
+  "rdainton/fiftyshades",
   config = function()
     require("fiftyshades").setup()
   end,
 }
 ```
 
-## Usage
-
-```lua
-vim.cmd.colorscheme("fiftyshades")
--- or
-require("fiftyshades").setup()
-```
