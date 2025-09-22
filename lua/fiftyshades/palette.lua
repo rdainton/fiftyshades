@@ -26,18 +26,22 @@ local colors = {
 
 	-- Accent colors
 	yellow = color("#dadd99", 186),
-	lime_green = color("#8fbc8f", 108),
 	matrix_green = color("#00ff41", 46),
+	sage_green = color("#c3d9a4", 151),
+	warm_brown = color("#b6967c", 137),
+	beige = color("#b19a8c", 138),
+	crimson = color("#b8162c", 124),
 
 	none = { gui = "NONE", cterm = "NONE" },
 }
 
 -- Semantic colors (alabaster approach)
 local semantic = {
-	strings = colors.lime_green,
-	constants = colors.lime_green,
+	strings = colors.sage_green,
+	constants = colors.warm_brown,
 	comments = colors.matrix_green,
-	functions = colors.lime_green,
+	functions = colors.beige,
+	errors = colors.crimson,
 }
 
 local palette = {
