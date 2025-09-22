@@ -10,7 +10,7 @@ local function color(gui, cterm)
 	return { gui = gui, cterm = cterm }
 end
 
-local palette = {
+local colors = {
 	-- Base colors
 	bg = color("#1e1e1e", 234),
 	fg = color("#CCCCCC", 252),
@@ -30,6 +30,19 @@ local palette = {
 	matrix_green = color("#00ff41", 46),
 
 	none = { gui = "NONE", cterm = "NONE" },
+}
+
+-- Semantic colors (alabaster approach)
+local semantic = {
+	strings = colors.lime_green,
+	constants = colors.lime_green,
+	comments = colors.matrix_green,
+	functions = colors.lime_green,
+}
+
+local palette = {
+	colors = colors,
+	semantic = semantic,
 }
 
 return palette
