@@ -14,8 +14,6 @@ local palette = require("fiftyshades.palette")
 --- | "reverse"
 --- | "nocombine"
 
-local background = palette.colors.bg
-
 local class_none = "FiftyShadesNone"
 local class_debug = "FiftyShadesDebug"
 
@@ -63,7 +61,7 @@ M.base_syntax = function()
 	hi(class_none, { fg = palette.colors.none, bg = palette.colors.none })
 	hi(class_debug, { fg = palette.colors.bg, bg = palette.semantic.errors })
 
-	hi("Normal", { fg = palette.colors.fg, bg = background })
+	hi("Normal", { fg = palette.colors.fg, bg = palette.colors.bg })
 	hi("Comment", { fg = palette.semantic.comments, bg = palette.colors.none })
 	hi("String", { fg = palette.semantic.strings, bg = palette.colors.none })
 	hi("Character", { fg = palette.semantic.strings, bg = palette.colors.none })
@@ -99,7 +97,7 @@ M.base_syntax = function()
 	hi("Structure", { fg = palette.colors.grey_20, bg = palette.colors.none })
 	hi("Typedef", { fg = palette.colors.grey_20, bg = palette.colors.none })
 	hi("Title", { fg = palette.colors.fg, bg = palette.colors.none })
-	hi("Todo", { fg = background, bg = palette.colors.sage_green })
+	hi("Todo", { fg = palette.colors.bg, bg = palette.colors.sage_green })
 	hi("Underlined", { fg = palette.colors.fg, bg = palette.colors.none })
 	hi("Ignore", { fg = palette.colors.grey_30, bg = palette.colors.none })
 end
@@ -121,15 +119,15 @@ M.ui = function()
 	hi("FoldColumn", { fg = palette.colors.grey_30, bg = palette.colors.none })
 	hi("SignColumn", { fg = palette.colors.none, bg = palette.colors.none })
 	hi("Pmenu", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
-	hi("PmenuSel", { fg = background, bg = palette.colors.grey_20 })
+	hi("PmenuSel", { fg = palette.colors.bg, bg = palette.colors.grey_20 })
 	hi("PmenuSbar", { fg = palette.colors.none, bg = palette.colors.grey_60 })
 	hi("PmenuThumb", { fg = palette.colors.none, bg = palette.colors.grey_30 })
 	hi("TabLine", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
 	hi("TabLineFill", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
-	hi("TabLineSel", { fg = palette.colors.fg, bg = background })
+	hi("TabLineSel", { fg = palette.colors.fg, bg = palette.colors.bg })
 	hi("StatusLine", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
 	hi("StatusLineNC", { fg = palette.colors.grey_30, bg = palette.colors.grey_60 })
-	hi("WildMenu", { fg = background, bg = palette.colors.grey_20 })
+	hi("WildMenu", { fg = palette.colors.bg, bg = palette.colors.grey_20 })
 	hi("Visual", { fg = palette.colors.fg, bg = palette.colors.grey_50 })
 	hi("Search", { fg = palette.colors.fg, bg = palette.colors.grey_30 })
 	hi("IncSearch", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
