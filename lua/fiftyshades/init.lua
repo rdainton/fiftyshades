@@ -1,6 +1,7 @@
 local M = {}
 
-local palette = require("fiftyshades.palette")
+local palette_module = require("fiftyshades.palette")
+local palette
 
 --- @class Highlight
 --- @field fg Color Foreground color
@@ -292,8 +293,24 @@ M.init = function(name)
 	vim.g.colors_name = name
 end
 
+--- @class SemanticColors
+--- @field comments Color? Optional comment color override
+--- @field strings Color? Optional string color override
+--- @field constants Color? Optional constant color override
+--- @field functions Color? Optional function color override
+--- @field errors Color? Optional error color override
+
+--- @class Options
+--- @field semantic SemanticColors? Optional semantic color overrides
+
 --- Main setup function that applies the complete colorscheme
-function M.setup()
+--- @param opts Options? Optional configuration table
+function M.setup(opts)
+	opts = opts or {}
+
+	-- Create palette with any semantic overrides
+	palette = palette_module.create_palette(opts.semantic)
+
 	M.init("fiftyshades")
 	M.base_syntax()
 	M.ui()

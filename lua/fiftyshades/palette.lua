@@ -35,8 +35,8 @@ local colors = {
 	none = { gui = "NONE", cterm = "NONE" },
 }
 
--- Semantic colors (alabaster approach)
-local semantic = {
+-- Default semantic colors (alabaster approach)
+local default_semantic = {
 	strings = colors.sage_green,
 	constants = colors.warm_brown,
 	comments = colors.matrix_green,
@@ -44,9 +44,20 @@ local semantic = {
 	errors = colors.crimson,
 }
 
-local palette = {
-	colors = colors,
-	semantic = semantic,
-}
+--- Creates a palette with optional semantic color overrides
+--- @param semantic_overrides table|nil Optional table of semantic color overrides
+--- @return table The complete palette with colors and semantic
+local function create_palette(semantic_overrides)
+	local semantic = vim.tbl_deep_extend("force", default_semantic, semantic_overrides or {})
 
-return palette
+	return {
+		colors = colors,
+		semantic = semantic,
+	}
+end
+
+-- Export both the factory function and color helper
+return {
+	create_palette = create_palette,
+	color = color,
+}
