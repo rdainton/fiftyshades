@@ -1,6 +1,6 @@
 # Fifty Shades
 
-A minimalist Neovim colorscheme inspired by Alabaster for Sublime Text. Features subtle syntax highlighting with colors only for comments, strings, constants, and functions - everything else remains greyscale.
+A minimalist Neovim colorscheme inspired by [Alabaster for Sublime Text](https://github.com/tonsky/sublime-scheme-alabaster). Features subtle syntax highlighting with colors only for comments, strings, constants, and functions - everything else remains greyscale.
 
 ## Installation
 
@@ -40,7 +40,7 @@ You can also use the built-in color helper:
 
 ```lua
 local fiftyshades = require("fiftyshades")
-plocal color = require("fiftyshades.palette").color
+local color = require("fiftyshades.palette").color
 
 fiftyshades.setup({
   semantic = {
