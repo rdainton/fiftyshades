@@ -108,8 +108,8 @@ M.ui = function()
 	local underline = { "underline" }
 
 	hi("Cursor", { fg = palette.colors.bg, bg = palette.colors.fg })
-	hi("CursorLine", { fg = palette.colors.none, bg = palette.colors.grey_60 })
-	hi("CursorLineNr", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
+	hi("CursorLine", { fg = palette.colors.none, bg = palette.colors.bg_accent })
+	hi("CursorLineNr", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
 	hi("ColorColumn", { fg = palette.colors.none, bg = palette.colors.grey_60 })
 	hi("LineNr", { fg = palette.colors.grey_30, bg = palette.colors.none })
 	hi("NonText", { fg = palette.colors.grey_50, bg = palette.colors.none })
@@ -126,8 +126,8 @@ M.ui = function()
 	hi("TabLine", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
 	hi("TabLineFill", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
 	hi("TabLineSel", { fg = palette.colors.fg, bg = palette.colors.bg })
-	hi("StatusLine", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
-	hi("StatusLineNC", { fg = palette.colors.grey_30, bg = palette.colors.grey_60 })
+	hi("StatusLine", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
+	hi("StatusLineNC", { fg = palette.colors.grey_30, bg = palette.colors.bg_accent })
 	hi("WildMenu", { fg = palette.colors.bg, bg = palette.colors.grey_20 })
 	hi("Visual", { fg = palette.colors.fg, bg = palette.colors.grey_50 })
 	hi("Search", { fg = palette.colors.fg, bg = palette.colors.grey_30 })
@@ -154,9 +154,13 @@ M.ui = function()
 	hs("DiagnosticUnderlineInfo", { fg = palette.colors.grey_30, bg = palette.colors.none }, underline)
 	hs("DiagnosticUnderlineHint", { fg = palette.colors.grey_30, bg = palette.colors.none }, underline)
 
-	hi("NormalFloat", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
-	hi("FloatBorder", { fg = palette.colors.grey_50, bg = palette.colors.grey_60 })
+	hi("NormalFloat", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
+	hi("FloatBorder", { fg = palette.colors.grey_50, bg = palette.colors.bg_accent })
 	hi("Whitespace", { fg = palette.colors.grey_50, bg = palette.colors.none })
+
+	hi("LspReferenceRead", { fg = palette.colors.none, bg = palette.colors.bg_accent })
+	hi("LspReferenceWrite", { fg = palette.colors.none, bg = palette.colors.bg_accent })
+	hi("LspReferenceText", { fg = palette.colors.none, bg = palette.colors.bg_accent })
 end
 
 --- Links various highlight groups to base groups for consistency
@@ -282,6 +286,9 @@ M.apply_links = function()
 
 	-- LSP semantic tokens in comments
 	link("@lsp.mod.documentation", "Comment")
+
+	-- Telescope
+	link("TelescopeSelection", "CursorLine")
 end
 
 --- Initializes the colorscheme by clearing existing highlights and setting options

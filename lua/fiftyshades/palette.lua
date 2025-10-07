@@ -12,7 +12,8 @@ end
 
 local colors = {
 	-- Base colors
-	bg = color("#232323", 235),
+	bg = color("#282c34", 235),
+	bg_accent = color("#22252c", 234),
 	fg = color("#bcbcbc", 250),
 
 	-- Grayscale spectrum
