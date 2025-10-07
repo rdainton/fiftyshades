@@ -131,7 +131,7 @@ M.ui = function()
 	hi("WildMenu", { fg = palette.colors.bg, bg = palette.colors.grey_20 })
 	hi("Visual", { fg = palette.colors.fg, bg = palette.colors.grey_50 })
 	hi("Search", { fg = palette.colors.fg, bg = palette.colors.grey_30 })
-	hi("IncSearch", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
+	hi("IncSearch", { fg = palette.colors.bg, bg = palette.colors.matrix_green })
 	hi("CurSearch", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
 	hi("Directory", { fg = palette.colors.grey_20, bg = palette.colors.none })
 

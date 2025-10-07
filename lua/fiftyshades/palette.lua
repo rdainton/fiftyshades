@@ -28,19 +28,21 @@ local colors = {
 	yellow = color("#dadd99", 186),
 	matrix_green = color("#00ff41", 46),
 	sage_green = color("#c3d9a4", 151),
-	warm_brown = color("#b6967c", 137),
-	beige = color("#b19a8c", 138),
 	crimson = color("#b8162c", 124),
+	green = color("#98C379", 114),
+	purple = color("#BF79C3", 139),
+	red = color("#E06C75", 204),
+	blue = color("#61AFEF", 75),
 
 	none = { gui = "NONE", cterm = "NONE" },
 }
 
 -- Default semantic colors (alabaster approach)
 local default_semantic = {
-	strings = colors.sage_green,
-	constants = colors.warm_brown,
-	comments = colors.matrix_green,
-	functions = colors.beige,
+	strings = colors.green,
+	constants = colors.purple,
+	comments = colors.red,
+	functions = colors.blue,
 	errors = colors.crimson,
 }
 
