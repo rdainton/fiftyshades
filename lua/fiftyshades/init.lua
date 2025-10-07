@@ -279,6 +279,9 @@ M.apply_links = function()
 	link("@tag.attribute", class_none)
 	link("@tag", "Function")
 	link("@text.uri.html", "String")
+
+	-- LSP semantic tokens in comments
+	link("@lsp.mod.documentation", "Comment")
 end
 
 --- Initializes the colorscheme by clearing existing highlights and setting options
