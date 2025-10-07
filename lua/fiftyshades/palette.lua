@@ -12,17 +12,15 @@ end
 
 local colors = {
 	-- Base colors
-	bg = color("#1e1e1e", 234),
-	fg = color("#CCCCCC", 252),
+	bg = color("#232323", 235),
+	fg = color("#bcbcbc", 250),
 
 	-- Grayscale spectrum
-	gray_10 = color("#fcfcfc", 255),
-	grey_20 = color("#f7f7f7", 255),
-	grey_30 = color("#a5a5a5", 248),
-	grey_40 = color("#5a5a5a", 240),
-	grey_50 = color("#303030", 236),
-	grey_60 = color("#242424", 235),
-	grey_70 = color("#181818", 233),
+	gray_10 = color("#d6d6d6", 188),
+	grey_20 = color("#d2d2d2", 252),
+	grey_30 = color("#bebebe", 250),
+	grey_50 = color("#3a3a3a", 237),
+	grey_60 = color("#2b2b2b", 236),
 
 	-- Accent colors
 	yellow = color("#dadd99", 186),
