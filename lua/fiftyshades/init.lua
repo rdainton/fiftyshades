@@ -1,3 +1,13 @@
+--- Fiftyshades - A minimal, monochrome-focused colorscheme
+---
+--- Color Philosophy:
+---   - bg_accent: Used for "selected/focused" UI elements (cursor line, status bar,
+---     floating windows, LSP references, Telescope selection, etc.)
+---   - matrix_green: Used for "active selections" (visual mode, search results,
+---     yank highlights, popup menu selection)
+---   - Greyscale spectrum: Provides subtle contrast for syntax and UI elements
+---   - Semantic colors: Minimal accent colors for strings, constants, comments,
+---     functions, and errors
 local M = {}
 
 local palette_module = require("fiftyshades.palette")
@@ -110,21 +120,21 @@ M.ui = function()
 	hi("Cursor", { fg = palette.colors.bg, bg = palette.colors.fg })
 	hi("CursorLine", { fg = palette.colors.none, bg = palette.colors.bg_accent })
 	hi("CursorLineNr", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
-	hi("ColorColumn", { fg = palette.colors.none, bg = palette.colors.grey_60 })
+	hi("ColorColumn", { fg = palette.colors.none, bg = palette.colors.bg_accent })
 	hi("LineNr", { fg = palette.colors.grey_30, bg = palette.colors.none })
-	hi("NonText", { fg = palette.colors.grey_50, bg = palette.colors.none })
+	hi("NonText", { fg = palette.colors.grey_60, bg = palette.colors.none })
 	hi("EndOfBuffer", { fg = palette.colors.grey_60, bg = palette.colors.none })
 	hi("VertSplit", { fg = palette.colors.grey_60, bg = palette.colors.none })
 	hi("WinSeparator", { fg = palette.colors.grey_60, bg = palette.colors.none })
 	hi("Folded", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
 	hi("FoldColumn", { fg = palette.colors.grey_30, bg = palette.colors.none })
 	hi("SignColumn", { fg = palette.colors.none, bg = palette.colors.none })
-	hi("Pmenu", { fg = palette.colors.fg, bg = palette.colors.grey_60 })
-	hi("PmenuSel", { fg = palette.colors.bg, bg = palette.colors.grey_20 })
-	hi("PmenuSbar", { fg = palette.colors.none, bg = palette.colors.grey_60 })
+	hi("Pmenu", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
+	hi("PmenuSel", { fg = palette.colors.bg, bg = palette.colors.matrix_green })
+	hi("PmenuSbar", { fg = palette.colors.none, bg = palette.colors.bg_accent })
 	hi("PmenuThumb", { fg = palette.colors.none, bg = palette.colors.grey_30 })
-	hi("TabLine", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
-	hi("TabLineFill", { fg = palette.colors.grey_20, bg = palette.colors.grey_60 })
+	hi("TabLine", { fg = palette.colors.grey_20, bg = palette.colors.bg_accent })
+	hi("TabLineFill", { fg = palette.colors.grey_20, bg = palette.colors.bg_accent })
 	hi("TabLineSel", { fg = palette.colors.fg, bg = palette.colors.bg })
 	hi("StatusLine", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
 	hi("StatusLineNC", { fg = palette.colors.grey_30, bg = palette.colors.bg_accent })
@@ -135,7 +145,7 @@ M.ui = function()
 	hi("CurSearch", { fg = palette.colors.bg, bg = palette.colors.matrix_green })
 	hi("Directory", { fg = palette.colors.grey_20, bg = palette.colors.none })
 
-	hs("MatchParen", { fg = palette.colors.fg, bg = palette.colors.grey_50 }, underline)
+	hs("MatchParen", { fg = palette.colors.fg, bg = palette.colors.bg_accent }, underline)
 
 	hi("ErrorMsg", { fg = palette.semantic.errors, bg = palette.colors.none })
 	hi("WarningMsg", { fg = palette.colors.grey_20, bg = palette.colors.none })
@@ -155,8 +165,8 @@ M.ui = function()
 	hs("DiagnosticUnderlineHint", { fg = palette.colors.grey_30, bg = palette.colors.none }, underline)
 
 	hi("NormalFloat", { fg = palette.colors.fg, bg = palette.colors.bg_accent })
-	hi("FloatBorder", { fg = palette.colors.grey_50, bg = palette.colors.bg_accent })
-	hi("Whitespace", { fg = palette.colors.grey_50, bg = palette.colors.none })
+	hi("FloatBorder", { fg = palette.colors.grey_60, bg = palette.colors.bg_accent })
+	hi("Whitespace", { fg = palette.colors.grey_60, bg = palette.colors.none })
 
 	hi("LspReferenceRead", { fg = palette.colors.none, bg = palette.colors.bg_accent })
 	hi("LspReferenceWrite", { fg = palette.colors.none, bg = palette.colors.bg_accent })
@@ -173,9 +183,6 @@ M.apply_links = function()
 
 	-- UI: search
 	link("CurSearch", "IncSearch")
-
-	-- UI: window
-	link("FloatBorder", "Normal")
 
 	-- UI: messages
 	link("Question", "String")

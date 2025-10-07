@@ -20,11 +20,9 @@ local colors = {
 	gray_10 = color("#d6d6d6", 188),
 	grey_20 = color("#d2d2d2", 252),
 	grey_30 = color("#bebebe", 250),
-	grey_50 = color("#3a3a3a", 237),
 	grey_60 = color("#2b2b2b", 236),
 
 	-- Accent colors
-	yellow = color("#dadd99", 186),
 	matrix_green = color("#00ff41", 46),
 	sage_green = color("#c3d9a4", 151),
 	crimson = color("#b8162c", 124),
